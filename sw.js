@@ -1,5 +1,5 @@
 /* Guarda la app para que abra sin conexión. Subir VERSION al cambiar archivos. */
-const VERSION = 'feed-v6';
+const VERSION = 'feed-v7';
 const SHELL = ['./', 'index.html', 'styles.css', 'app.js', 'manifest.webmanifest', 'icons/icon-180.png', 'icons/icon-192.png', 'icons/icon-512.png'];
 
 self.addEventListener('install', (e) => {
