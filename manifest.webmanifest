@@ -1,0 +1,17 @@
+{
+  "name": "Planificador de feed",
+  "short_name": "Feed",
+  "description": "Ordena y prepara tus publicaciones de Instagram antes de publicarlas.",
+  "lang": "es",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FBF9FA",
+  "theme_color": "#FBF9FA",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

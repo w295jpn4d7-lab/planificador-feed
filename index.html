@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Planificador de feed</title>
+  <meta name="description" content="Planifica y ordena tus publicaciones de Instagram antes de publicarlas.">
+  <meta name="theme-color" content="#FBF9FA" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#141213" media="(prefers-color-scheme: dark)">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Feed">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-180.png">
+  <link rel="icon" type="image/png" href="icons/icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+      <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 6h8M16 6h4M4 12h2M10 12h10M4 18h11M19 18h1"/><circle cx="14" cy="6" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="17" cy="18" r="2"/></symbol>
+      <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+      <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></symbol>
+      <symbol id="i-share" viewBox="0 0 24 24"><path d="M12 3v12M8 7l4-4 4 4M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></symbol>
+      <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"/></symbol>
+      <symbol id="i-stack" viewBox="0 0 24 24"><rect x="8" y="3" width="13" height="13" rx="2"/><path d="M16 16v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2h3"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 5 5L20 7"/></symbol>
+      <symbol id="i-photo-plus" viewBox="0 0 24 24"><path d="M15 8h.01M12.5 21H6a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v6.5"/><path d="m3 16 5-5c.93-.9 2.07-.9 3 0l4 4"/><path d="m14 14 1-1c.67-.64 1.44-.82 2.16-.53M16 19h6M19 16v6"/></symbol>
+      <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+      <symbol id="i-scissors" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.12 15.88M14.47 14.48 20 20M8.12 8.12 12 12"/></symbol>
+      <symbol id="i-reserve" viewBox="0 0 24 24"><path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2M10 4h4M10 20h4M4 10v4M20 10v4"/></symbol>
+      <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+      <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor" stroke="none"/></symbol>
+      <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></symbol>
+      <symbol id="i-cover" viewBox="0 0 24 24"><path d="M12 17.75 5.83 21l1.18-6.88-5-4.87 6.9-1L12 2l3.09 6.26 6.9 1-5 4.87L17.18 21z"/></symbol>
+    </defs>
+  </svg>
+
+  <header class="top">
+    <div class="top-row">
+      <div class="title-block">
+        <h1><button class="account-btn" id="btn-account" aria-haspopup="dialog" aria-label="Cambiar de cuenta"><span id="account-name">Feed</span><svg aria-hidden="true"><use href="#i-chevron"/></svg></button></h1>
+        <p class="summary" id="summary"></p>
+      </div>
+      <button class="icon-btn" id="btn-settings" aria-label="Ajustes y marcadores">
+        <svg><use href="#i-sliders"/></svg>
+      </button>
+    </div>
+    <div class="chips" id="filter-chips" role="toolbar" aria-label="Resaltar por marcador"></div>
+  </header>
+
+  <main>
+    <div class="grid" id="grid" aria-label="Tu feed planificado"></div>
+
+    <section class="empty" id="empty" hidden>
+      <svg class="empty-icon"><use href="#i-photo-plus"/></svg>
+      <h2>Arma tu feed antes de publicarlo</h2>
+      <p>Agrega fotos de tu galería, ordénalas manteniendo el dedo sobre una y arrastrándola, y escribe el texto de cada publicación. Todo queda guardado solo en este teléfono.</p>
+    </section>
+  </main>
+
+  <div class="dock">
+    <button class="btn btn-primary btn-add" id="btn-add">
+      <svg><use href="#i-plus"/></svg>
+      <span>Agregar fotos</span>
+    </button>
+    <button class="btn btn-secondary btn-reserve" id="btn-reserve">
+      <svg><use href="#i-reserve"/></svg>
+      <span>Reservar espacio</span>
+    </button>
+  </div>
+
+  <input type="file" id="file-new" accept="image/*" multiple hidden>
+  <input type="file" id="file-more" accept="image/*" multiple hidden>
+  <input type="file" id="file-import" accept=".json,application/json" multiple hidden>
+
+  <!-- Detalle de una publicación -->
+  <dialog class="sheet" id="sheet-post" aria-labelledby="post-title">
+    <div class="sheet-grab" data-grab><span></span></div>
+    <div class="sheet-head">
+      <h2 id="post-title">Publicación</h2>
+      <button class="icon-btn" data-close aria-label="Cerrar"><svg><use href="#i-x"/></svg></button>
+    </div>
+    <div class="sheet-body" id="post-body"></div>
+  </dialog>
+
+  <!-- Elegir cómo agregar varias fotos -->
+  <dialog class="sheet sheet-small" id="sheet-mode" aria-labelledby="mode-title">
+    <div class="sheet-grab" data-grab><span></span></div>
+    <div class="sheet-head">
+      <h2 id="mode-title">Elegiste <span id="mode-count"></span> fotos</h2>
+      <button class="icon-btn" data-close aria-label="Cancelar"><svg><use href="#i-x"/></svg></button>
+    </div>
+    <div class="sheet-body">
+      <div class="stack-actions">
+        <button class="btn btn-primary" data-mode="separate">Una publicación por foto</button>
+        <button class="btn btn-secondary" data-mode="carousel">Todas en un carrusel</button>
+      </div>
+      <p class="hint" id="mode-hint"></p>
+    </div>
+  </dialog>
+
+  <!-- Cortar panorámica en tira -->
+  <dialog class="sheet" id="sheet-pano" aria-labelledby="pano-title">
+    <div class="sheet-grab" data-grab><span></span></div>
+    <div class="sheet-head">
+      <h2 id="pano-title">Cortar en tira</h2>
+      <button class="icon-btn" data-close aria-label="Cancelar"><svg><use href="#i-x"/></svg></button>
+    </div>
+    <div class="sheet-body" id="pano-body"></div>
+  </dialog>
+
+  <!-- Cuentas -->
+  <dialog class="sheet" id="sheet-accounts" aria-labelledby="accounts-title">
+    <div class="sheet-grab" data-grab><span></span></div>
+    <div class="sheet-head">
+      <h2 id="accounts-title">Cuentas</h2>
+      <button class="icon-btn" data-close aria-label="Cerrar"><svg><use href="#i-x"/></svg></button>
+    </div>
+    <div class="sheet-body" id="accounts-body"></div>
+  </dialog>
+
+  <!-- Ajustes -->
+  <dialog class="sheet" id="sheet-settings" aria-labelledby="settings-title">
+    <div class="sheet-grab" data-grab><span></span></div>
+    <div class="sheet-head">
+      <h2 id="settings-title">Ajustes</h2>
+      <button class="icon-btn" data-close aria-label="Cerrar"><svg><use href="#i-x"/></svg></button>
+    </div>
+    <div class="sheet-body" id="settings-body"></div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
